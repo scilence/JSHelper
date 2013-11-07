@@ -22,6 +22,15 @@
                 }
             }
             return o;
+        },
+        curry: function(fn) {
+          var slice = Array.prototype.slice,
+              stored_args = slice.call(arguments, 1);
+          return function() {
+            var new_args = slice.call(arguments);
+            var all_args = stored_args.concat(new_args);
+            return fn.apply(null, all_args);
+          }
         }
     });
 })($);

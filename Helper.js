@@ -13,7 +13,7 @@
         isNumber: function(n) {
             return !isNaN(parseFloat(n)) && isFinite(n);
         },
-        trimObj: function trimCriteria(o) {
+        trimObj: function(o) {
             if (!o) { return {}; }
 
             for (var t in o) {

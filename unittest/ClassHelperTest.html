@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QUnit basic example</title>
+  <link rel="stylesheet" href="../libs/qunit/qunit-1.12.0.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="../libs/qunit/qunit-1.12.0.js"></script>
+  <script src="../ClassHelper.js"></script>
+  <script>
+    module("Klass");
+    test( "Parent Class", function() {
+      var baseName = "KingKone";
+      var BaseClass = Klass(null, {
+        __construct: function(name) {
+          this.name = name || "no name"
+        },
+        getName: function(){
+          return this.name;
+        }
+      });
+
+      var base = new BaseClass(baseName);
+      var noname = new BaseClass();
+
+      notEqual(BaseClass, null, "Create Base Class Successed");
+      notEqual(base, null, "Create Base instance with name Successed");
+      notEqual(noname, null, "Create Base instance without name Successed");
+      equal(noname.name, "no name", "the property(name) of no name correct");
+      equal(noname.getName(), "no name", "the getName() of no name correct");
+      equal(base.name, baseName, "the property(name) of no base");
+      equal(base.getName(), baseName, "the getName() of no base");
+    });
+
+    test( "Child Class", function() {
+      var baseName = "KingKone";
+      var BaseClass = Klass(null, {
+        __construct: function(name) {
+          this.name = name || "no name"
+        },
+        getName: function(){
+          return this.name;
+        }
+      });
+
+      var childName = "Childdy",
+          age = 21;
+      var Child = Klass(BaseClass, {
+        __construct: function(name, age) {
+          this.age = age || 0;
+        },
+        getAge: function(){
+          return this.age;
+        },
+        getInfo: function(){
+          return this.name + ": " + this.age;
+        }
+      })
+
+      var child = new Child(childName, age);
+
+      notEqual(Child, null, "Create Child Class Successed");
+      notEqual(child, null, "Create child instance Successed");
+
+      equal(child.name, childName, "Child's name is correct.");
+      equal(child.getName(), childName, "Child's getName() is correct.");
+
+      equal(child.age, age, "Child's age is correct.");
+      equal(child.getAge(), age, "Child's getAge() is correct.");
+
+      equal(child.getInfo(), childName + ": " + age, "Child's getInfo() is correct.");
+
+    });
+
+
+  </script>
+</body>
+</html>

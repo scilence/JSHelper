@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>QUnit basic example</title>
+  <title>ClassHelper Unit Test</title>
   <link rel="stylesheet" href="../libs/qunit/qunit-1.12.0.css">
 </head>
 <body>
@@ -61,17 +61,26 @@
       })
 
       var child = new Child(childName, age);
+      var childNoAge = new Child(childName);
 
       notEqual(Child, null, "Create Child Class Successed");
       notEqual(child, null, "Create child instance Successed");
+      notEqual(childNoAge, null, "Create child instance without age Successed");
 
       equal(child.name, childName, "Child's name is correct.");
       equal(child.getName(), childName, "Child's getName() is correct.");
 
+      equal(childNoAge.name, childName, "[No Age]Child's name is correct.");
+      equal(childNoAge.getName(), childName, "[No Age]Child's getName() is correct.");
+
       equal(child.age, age, "Child's age is correct.");
       equal(child.getAge(), age, "Child's getAge() is correct.");
 
+      equal(childNoAge.age, 0, "Child's age is correct.");
+      equal(childNoAge.getAge(), 0, "Child's getAge() is correct.");
+
       equal(child.getInfo(), childName + ": " + age, "Child's getInfo() is correct.");
+      equal(childNoAge.getInfo(), childName + ": " + 0, "[No Age]Child's getInfo() is correct.");
 
     });
 
